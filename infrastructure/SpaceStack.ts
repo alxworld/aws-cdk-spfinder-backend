@@ -3,10 +3,15 @@ import { Stack, StackProps } from 'aws-cdk-lib';
 import { Code, Function as LambdaFunction, Runtime } from 'aws-cdk-lib/aws-lambda';
 import { join } from 'path';
 import { RestApi, LambdaIntegration } from 'aws-cdk-lib/aws-apigateway';
+import { GenericTable } from './GenericTable';
 
 export class SpaceStack extends Stack {
     
+    // api gateway
     private api = new RestApi(this, 'SpaceApi');
+
+    // dynamodb table
+    private spacesTable = new GenericTable('SpacesTable', 'spaceID', this);
 
     constructor(scope: Construct, id: string, props: StackProps) {
         super(scope, id, props);
