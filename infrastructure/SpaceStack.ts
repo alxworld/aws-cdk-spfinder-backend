@@ -4,6 +4,7 @@ import { Code, Function as LambdaFunction, Runtime } from 'aws-cdk-lib/aws-lambd
 import { join } from 'path';
 import { RestApi, LambdaIntegration } from 'aws-cdk-lib/aws-apigateway';
 import { GenericTable } from './GenericTable';
+import { PolicyStatement } from 'aws-cdk-lib/aws-iam';
 
 export class SpaceStack extends Stack {
     
@@ -26,6 +27,12 @@ export class SpaceStack extends Stack {
         const helloLambdaIntegration = new LambdaIntegration(helloLambda);
         const helloLamdaResource = this.api.root.addResource('hello');
         helloLamdaResource.addMethod('GET', helloLambdaIntegration);
+
+        // S3 Access Grants
+        const s3ListPolicy = new PolicyStatement();
+        s3ListPolicy.addActions('s3.listAllMyBuckets');
+        s3ListPolicy.addResources('*');
+        helloLambda.addToRolePolicy(s3ListPolicy);
 
     
     }

@@ -7,7 +7,7 @@ exports.main = async function (event, context) {
     
     const buckets = await s3Client.listBuckets().promise();
     
-    //console.log("ALEX EVENT : " + JSON.stringify(event, null, 2));
+    console.log("ALEX EVENT : " + JSON.stringify(event, null, 2));
     //return context.logStreamName;
     return  {
         statusCode: 200,
