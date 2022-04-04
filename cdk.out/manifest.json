@@ -23,7 +23,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/65df6f330795143a4546c1b7ff5d5aa21afc09943ff1ca481313a9461d985b16.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/d898083772f97771c49265253cf12cb75887c7091347bb849145a776e08c33db.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -61,7 +61,7 @@
         "/Space-finder/SpaceApi/Deployment/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "SpaceApiDeploymentA2B9E765554aec58dc5d1be79899ce4101601e9d"
+            "data": "SpaceApiDeploymentA2B9E765cd77b2b0e734703ad2339f0008ccb61c"
           }
         ],
         "/Space-finder/SpaceApi/DeploymentStage.prod/Resource": [
@@ -124,6 +124,18 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "helloLambda79DCE371"
+          }
+        ],
+        "/Space-finder/helloLambdaNodeJS/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "helloLambdaNodeJSServiceRole9951D888"
+          }
+        ],
+        "/Space-finder/helloLambdaNodeJS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "helloLambdaNodeJSAEFC0103"
           }
         ],
         "/Space-finder/CDKMetadata/Default": [

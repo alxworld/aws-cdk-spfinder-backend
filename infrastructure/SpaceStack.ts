@@ -4,8 +4,8 @@ import { Code, Function as LambdaFunction, Runtime } from 'aws-cdk-lib/aws-lambd
 import { join } from 'path';
 import { RestApi, LambdaIntegration } from 'aws-cdk-lib/aws-apigateway';
 import { GenericTable } from './GenericTable';
-//import { PolicyStatement } from 'aws-cdk-lib/aws-iam';
-//import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
+import { PolicyStatement } from 'aws-cdk-lib/aws-iam';
+import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 
 export class SpaceStack extends Stack {
     
@@ -24,13 +24,13 @@ export class SpaceStack extends Stack {
             handler: 'hello.main'
         });
 
-        // const helloLambdaNodeJS = new NodejsFunction(this, 'helloLambdaNodeJS', {
-        //     entry: (join(__dirname, '..', 'services', 'node-lambda','hello.ts')),
-        //     handler: 'handler'
-        // });
+        const helloLambdaNodeJS = new NodejsFunction(this, 'helloLambdaNodeJS', {
+            entry: (join(__dirname, '..', 'services', 'node-lambda','hello.ts')),
+            handler: 'handler'
+        });
 
         // Hello API Lambda integration ( linking API Gateway with Lambda )
-        const helloLambdaIntegration = new LambdaIntegration(helloLambda);
+        const helloLambdaIntegration = new LambdaIntegration(helloLambdaNodeJS);
         const helloLamdaResource = this.api.root.addResource('hello');
         helloLamdaResource.addMethod('GET', helloLambdaIntegration);
 
