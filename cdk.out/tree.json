@@ -462,45 +462,6 @@
                       "fqn": "aws-cdk-lib.aws_iam.CfnRole",
                       "version": "2.19.0"
                     }
-                  },
-                  "DefaultPolicy": {
-                    "id": "DefaultPolicy",
-                    "path": "Space-finder/helloLambda/ServiceRole/DefaultPolicy",
-                    "children": {
-                      "Resource": {
-                        "id": "Resource",
-                        "path": "Space-finder/helloLambda/ServiceRole/DefaultPolicy/Resource",
-                        "attributes": {
-                          "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
-                          "aws:cdk:cloudformation:props": {
-                            "policyDocument": {
-                              "Statement": [
-                                {
-                                  "Action": "s3.listAllMyBuckets",
-                                  "Effect": "Allow",
-                                  "Resource": "*"
-                                }
-                              ],
-                              "Version": "2012-10-17"
-                            },
-                            "policyName": "helloLambdaServiceRoleDefaultPolicy5215B3C0",
-                            "roles": [
-                              {
-                                "Ref": "helloLambdaServiceRoleBB046714"
-                              }
-                            ]
-                          }
-                        },
-                        "constructInfo": {
-                          "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
-                          "version": "2.19.0"
-                        }
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_iam.Policy",
-                      "version": "2.19.0"
-                    }
                   }
                 },
                 "constructInfo": {
@@ -544,7 +505,7 @@
                       "s3Bucket": {
                         "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
                       },
-                      "s3Key": "3ae2771eb3b32e8946c44eebcaa2598c1106d92a1b550d5c91260666c55d9a92.zip"
+                      "s3Key": "290781add4f4f4b736097af331b7cd7b3d5763cfbcf37424b92b545e24d4d8a9.zip"
                     },
                     "role": {
                       "Fn::GetAtt": [
