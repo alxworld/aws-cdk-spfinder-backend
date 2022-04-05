@@ -4,7 +4,7 @@ import { Code, Function as LambdaFunction, Runtime } from 'aws-cdk-lib/aws-lambd
 import { join } from 'path';
 import { RestApi, LambdaIntegration } from 'aws-cdk-lib/aws-apigateway';
 import { GenericTable } from './GenericTable';
-import { PolicyStatement } from 'aws-cdk-lib/aws-iam';
+import { Effect as IAMEffect, PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 
 export class SpaceStack extends Stack {
@@ -13,7 +13,8 @@ export class SpaceStack extends Stack {
     private api = new RestApi(this, 'SpaceApi');
 
     // dynamodb table
-    private spacesTable = new GenericTable('SpacesTable', 'spaceID', this);
+    //private spacesTable = new GenericTable('SpacesTable', 'spaceID', this);
+    private spacesTable = new GenericTable(this, {tableName: 'SpacesTable', primaryKey: 'spaceId', createLambdaPath: 'Create'});
 
     constructor(scope: Construct, id: string, props: StackProps) {
         super(scope, id, props);
@@ -26,7 +27,7 @@ export class SpaceStack extends Stack {
 
         const helloLambdaNodeJS = new NodejsFunction(this, 'helloLambdaNodeJS', {
             entry: (join(__dirname, '..', 'services', 'node-lambda','hello.ts')),
-            handler: 'handler'
+            handler: 'handler' 
         });
 
         // Hello API Lambda integration ( linking API Gateway with Lambda )
@@ -36,9 +37,17 @@ export class SpaceStack extends Stack {
 
         // S3 Access Grants
         // const s3ListPolicy = new PolicyStatement();
-        // s3ListPolicy.addActions('s3.listAllMyBuckets');
+        // s3ListPolicy.addActions('s3.*');
         // s3ListPolicy.addResources('*');
-        // helloLambda.addToRolePolicy(s3ListPolicy);
+        helloLambdaNodeJS.addToRolePolicy(new PolicyStatement({
+            effect: IAMEffect.ALLOW,
+            actions: ['s3:ListAllMyBuckets'],
+            resources: ['*']
+        }));
+
+        // Spaces API integration
+        const spaceResource = this.api.root.addResource('spaces'); 
+        spaceResource.addMethod('POST', this.spacesTable.createLambdaIntegration);
 
     
     }
